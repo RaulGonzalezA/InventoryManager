@@ -1,12 +1,5 @@
 ﻿using InventoryManagerAPI.Application.Interfaces;
-using InventoryManagerAPI.Domain;
 using InventoryManagerAPI.Domain.Interfaces;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagerAPI.Application.Services
 {

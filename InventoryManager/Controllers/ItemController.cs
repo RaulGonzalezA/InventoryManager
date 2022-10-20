@@ -1,7 +1,7 @@
-﻿using InventoryManagerAPI.Domain.Exceptions;
+﻿using FluentValidation.Results;
 using InventoryManagerAPI.Application.Interfaces;
 using InventoryManagerAPI.Application.Models;
-using FluentValidation.Results;
+using InventoryManagerAPI.Domain.Exceptions;
 using InventoryManagerAPI.Host.Validators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,8 +49,8 @@ namespace InventoryManagerAPI.Host.Controllers
 		/// <response code="201">New object created</response>
 		/// <response code="400">If any error into the response</response>
 		/// <response code="401">If not authorized</response>
-		[HttpPost]
-		public async Task<IActionResult> Post([FromBody] ItemDTO itemModel)
+		[HttpPost("", Name = nameof(ItemController.CreateItem))]
+		public async Task<IActionResult> CreateItem([FromBody] ItemDTO itemModel)
 		{
 			ItemFluentValidator validator = new ItemFluentValidator();
 			ValidationResult results = validator.Validate(itemModel);
@@ -74,7 +74,7 @@ namespace InventoryManagerAPI.Host.Controllers
 		}
 
 		/// <summary>
-		/// Delete an Item
+		/// Delete an Item by name from the inventory
 		/// </summary>
 		/// <param name="name">Name of the item</param>
 		/// <returns></returns>
@@ -82,8 +82,8 @@ namespace InventoryManagerAPI.Host.Controllers
 		/// <response code="400">If any error into the response</response>
 		/// <response code="401">If not authorized</response>
 		/// <response code="404">If not found the item</response>
-		[HttpDelete("{name}")]
-		public async Task<IActionResult> Delete([FromRoute] string name)
+		[HttpDelete("{name}", Name = nameof(ItemController.DeleteItem))]
+		public async Task<IActionResult> DeleteItem([FromRoute] string name)
 		{
 			if (string.IsNullOrWhiteSpace(name))
 			{

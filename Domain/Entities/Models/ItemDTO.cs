@@ -1,6 +1,6 @@
 ﻿using InventoryManagerAPI.Domain.Enums;
 
-namespace InventoryManagerAPI.Application.Models
+namespace InventoryManagerAPI.Domain.Entities.Models
 {
 	/// <summary>
 	/// Item Model

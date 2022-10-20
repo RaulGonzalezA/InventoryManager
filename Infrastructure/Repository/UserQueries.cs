@@ -1,14 +1,6 @@
-﻿using InventoryManagerAPI.Domain;
-using InventoryManagerAPI.Domain.Entities;
+﻿using InventoryManagerAPI.Domain.Entities;
 using InventoryManagerAPI.Domain.Interfaces;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {

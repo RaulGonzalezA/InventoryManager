@@ -1,6 +1,4 @@
-﻿using InventoryManagerAPI.Domain;
-
-namespace InventoryManagerAPI.Application.Interfaces
+﻿namespace InventoryManagerAPI.Application.Interfaces
 {
 	public interface IUserService
 	{

@@ -12,7 +12,7 @@ namespace InventoryManagerAPI.Domain.Interfaces
 		/// </summary>
 		/// <param name="item">new item</param>
 		/// <returns>the new item</returns>
-		public  Task<Item> AddAsync(Item item);
+		public Task<Item> AddAsync(Item item);
 
 		/// <summary>
 		/// Removes an item by name

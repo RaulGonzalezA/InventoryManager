@@ -1,9 +1,9 @@
-﻿using InventoryManagerAPI.Domain.Exceptions;
-using InventoryManagerAPI.Application.Interfaces;
+﻿using InventoryManagerAPI.Application.Interfaces;
 using InventoryManagerAPI.Application.Models;
+using InventoryManagerAPI.Domain.Entities;
+using InventoryManagerAPI.Domain.Exceptions;
 using InventoryManagerAPI.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
-using InventoryManagerAPI.Domain.Entities;
 
 namespace InventoryManagerAPI.Application.Services
 {

@@ -1,7 +1,7 @@
+using Infrastructure.Repository;
 using InventoryManagerAPI.Application.Interfaces;
 using InventoryManagerAPI.Application.Services;
 using InventoryManagerAPI.Domain.Interfaces;
-using Infrastructure.Repository;
 using InventoryManagerAPI.Host.Handlers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
@@ -17,7 +17,8 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserQueries, UserQueries>();
 
-builder.Services.AddControllers().AddJsonOptions(options => {
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
 	options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 	options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
@@ -32,7 +33,8 @@ builder.Services.AddSwaggerGen(options =>
 		Description = "An inventory manager for items",
 	});
 
-	options.AddSecurityDefinition("Basic", new OpenApiSecurityScheme { 
+	options.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+	{
 		Description = "Basic Auth",
 		Name = "Authorization",
 		In = ParameterLocation.Header,

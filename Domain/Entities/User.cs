@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InventoryManagerAPI.Domain.Entities
+﻿namespace InventoryManagerAPI.Domain.Entities
 {
 	/// <summary>
 	/// User of the aplication

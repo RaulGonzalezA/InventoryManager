@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using InventoryManagerAPI.Application.Models;
+using InventoryManagerAPI.Domain.Entities.Models;
 
 namespace InventoryManagerAPI.Host.Validators
 {
