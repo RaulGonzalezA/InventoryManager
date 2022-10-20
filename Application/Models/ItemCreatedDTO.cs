@@ -1,16 +1,16 @@
-﻿using Domain.Enums;
+﻿using InventoryManagerAPI.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Models
+namespace InventoryManagerAPI.Application.Models
 {
 	/// <summary>
 	/// Item created model
 	/// </summary>
-	public class ItemCreatedModel : ItemModel
+	public class ItemCreatedDTO : ItemDTO
 	{
 		/// <summary>
 		/// Constructor for Item created
@@ -21,7 +21,7 @@ namespace Application.Models
 		/// <param name="type"></param>
 		/// <param name="price"></param>
 		/// <param name="amount"></param>
-		public ItemCreatedModel(Guid id, string? name, DateTime expirationDate, ObjectTypeEnum type, decimal price, int amount)
+		public ItemCreatedDTO(Guid id, string? name, DateTime expirationDate, ObjectTypeEnum type, decimal price, int amount)
 		{
 			Id = id;
 			Name = name;

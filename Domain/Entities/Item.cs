@@ -1,11 +1,11 @@
-﻿using Domain.Enums;
+﻿using InventoryManagerAPI.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace InventoryManagerAPI.Domain.Entities
 {
 	/// <summary>
 	/// Item of the inventory
@@ -19,9 +19,9 @@ namespace Domain
 		{
 		}
 
-		public Item(string name, DateTime expirationDate, ObjectTypeEnum type, decimal price, int amount)
+		public Item(Guid id, string name, DateTime expirationDate, ObjectTypeEnum type, decimal price, int amount)
 		{
-			Id = Guid.NewGuid();
+			Id = id;
 			Name = name;
 			ExpirationDate = expirationDate;
 			Type = type;

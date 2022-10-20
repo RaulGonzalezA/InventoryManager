@@ -1,5 +1,6 @@
-﻿using Domain;
-using Domain.Interfaces;
+﻿using InventoryManagerAPI.Domain;
+using InventoryManagerAPI.Domain.Entities;
+using InventoryManagerAPI.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Infrastructure.Repository
 			using (var context = new ApiDbContext())
 			{
 				var itemResult = await context.Items.AddAsync(item);
-				context.SaveChanges();
+				await context.SaveChangesAsync();
 
 				return itemResult.Entity;
 			}
@@ -33,19 +34,14 @@ namespace Infrastructure.Repository
 		/// <summary>
 		/// Removes an item by name
 		/// </summary>
-		/// <param name="name">Name of the item to remove</param>
+		/// <param name="item">Item to remove</param>
 		/// <returns>If the item was removed or not</returns>
-		public async Task<bool> RemoveItemAsync(string name)
+		public async Task<bool> RemoveItemAsync(Item item)
 		{
 			using (var context = new ApiDbContext())
 			{
-				var item = await context.Items.Where(x => x.Name == name).FirstOrDefaultAsync();
-				
-				if (item == null)
-					return false;
-				
 				var result = context.Items.Remove(item);
-				context.SaveChanges();
+				await context.SaveChangesAsync();
 			}
 
 			return true;

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InventoryManagerAPI.Domain.Entities;
 
-namespace Domain.Interfaces
+namespace InventoryManagerAPI.Domain.Interfaces
 {
 	/// <summary>
 	/// Repository to manage Items
@@ -21,8 +17,8 @@ namespace Domain.Interfaces
 		/// <summary>
 		/// Removes an item by name
 		/// </summary>
-		/// <param name="name">Name of the item to remove</param>
+		/// <param name="item">Item to remove</param>
 		/// <returns>If the item was removed or not</returns>
-		public Task<bool> RemoveItemAsync(string name);
+		public Task<bool> RemoveItemAsync(Item item);
 	}
 }

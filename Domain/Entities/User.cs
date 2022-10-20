@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace InventoryManagerAPI.Domain.Entities
 {
 	/// <summary>
 	/// User of the aplication

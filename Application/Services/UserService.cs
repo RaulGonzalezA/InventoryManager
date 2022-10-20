@@ -1,6 +1,6 @@
-﻿using Application.Interfaces;
-using Domain;
-using Domain.Interfaces;
+﻿using InventoryManagerAPI.Application.Interfaces;
+using InventoryManagerAPI.Domain;
+using InventoryManagerAPI.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace InventoryManagerAPI.Application.Services
 {
 	public class UserService : IUserService
 	{

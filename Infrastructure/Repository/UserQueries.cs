@@ -1,5 +1,6 @@
-﻿using Domain;
-using Domain.Interfaces;
+﻿using InventoryManagerAPI.Domain;
+using InventoryManagerAPI.Domain.Entities;
+using InventoryManagerAPI.Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

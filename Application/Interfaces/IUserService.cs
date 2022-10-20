@@ -1,6 +1,6 @@
-﻿using Domain;
+﻿using InventoryManagerAPI.Domain;
 
-namespace Application.Interfaces
+namespace InventoryManagerAPI.Application.Interfaces
 {
 	public interface IUserService
 	{

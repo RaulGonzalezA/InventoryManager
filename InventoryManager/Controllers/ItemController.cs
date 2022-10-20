@@ -1,12 +1,13 @@
-﻿using Application.Interfaces;
-using Application.Models;
+﻿using InventoryManagerAPI.Domain.Exceptions;
+using InventoryManagerAPI.Application.Interfaces;
+using InventoryManagerAPI.Application.Models;
 using FluentValidation.Results;
-using InventoryManagerAPI.Validators;
+using InventoryManagerAPI.Host.Validators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace InventoryManagerAPI.Controllers
+namespace InventoryManagerAPI.Host.Controllers
 {
 	/// <summary>
 	/// Item Controller
@@ -49,7 +50,7 @@ namespace InventoryManagerAPI.Controllers
 		/// <response code="400">If any error into the response</response>
 		/// <response code="401">If not authorized</response>
 		[HttpPost]
-		public async Task<IActionResult> Post([FromBody] ItemModel itemModel)
+		public async Task<IActionResult> Post([FromBody] ItemDTO itemModel)
 		{
 			ItemFluentValidator validator = new ItemFluentValidator();
 			ValidationResult results = validator.Validate(itemModel);
@@ -67,8 +68,49 @@ namespace InventoryManagerAPI.Controllers
 			}
 			catch (Exception ex)
 			{
+				_logger.LogError($"Error creating Item: {ex.Message}");
 				return BadRequest(ex.Message);
 			}
+		}
+
+		/// <summary>
+		/// Delete an Item
+		/// </summary>
+		/// <param name="name">Name of the item</param>
+		/// <returns></returns>
+		/// <response code="204">If the item was deleted</response>
+		/// <response code="400">If any error into the response</response>
+		/// <response code="401">If not authorized</response>
+		/// <response code="404">If not found the item</response>
+		[HttpDelete("{name}")]
+		public async Task<IActionResult> Delete([FromRoute] string name)
+		{
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				return BadRequest($"{nameof(name)} cant be Null or whitespace.");
+			}
+
+			try
+			{
+				var deleted = await _itemService.DeleteItem(name);
+				if (!deleted)
+				{
+					_logger.LogError($"Item with name {name} not deleted");
+					return BadRequest($"Item with name {name} not deleted");
+				}
+			}
+			catch (NotFoundException ex)
+			{
+				_logger.LogError($"Item with name {name} not found: {ex.Message}");
+				return NotFound(name);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError($"Error deleting Item with name {name}: {ex.Message}");
+				return BadRequest(ex.Message);
+			}
+
+			return NoContent();
 		}
 	}
 }

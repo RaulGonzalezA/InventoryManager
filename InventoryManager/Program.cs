@@ -1,8 +1,8 @@
-using Application.Interfaces;
-using Application.Services;
-using Domain.Interfaces;
+using InventoryManagerAPI.Application.Interfaces;
+using InventoryManagerAPI.Application.Services;
+using InventoryManagerAPI.Domain.Interfaces;
 using Infrastructure.Repository;
-using InventoryManagerAPI.Handlers;
+using InventoryManagerAPI.Host.Handlers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IItemQueries, ItemQueries>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IUserService, UserService>();

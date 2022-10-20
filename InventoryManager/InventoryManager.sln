@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagerAPI", "InventoryManagerAPI.csproj", "{E547695F-EB5B-402C-9DE4-9C262F9101E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManagerAPI.Host", "InventoryManagerAPI.Host.csproj", "{E547695F-EB5B-402C-9DE4-9C262F9101E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{3CC644A0-ABD6-49DB-8A93-AEBC18215B65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManagerAPI.Domain", "..\Domain\InventoryManagerAPI.Domain.csproj", "{3CC644A0-ABD6-49DB-8A93-AEBC18215B65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{7F4CF2CD-D7F5-4F5F-8BF0-F2FF49DBA34D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManagerAPI.Infrastructure", "..\Infrastructure\InventoryManagerAPI.Infrastructure.csproj", "{7F4CF2CD-D7F5-4F5F-8BF0-F2FF49DBA34D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{21833E5D-93CB-4ED2-97A6-33398AABE7AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManagerAPI.Application", "..\Application\InventoryManagerAPI.Application.csproj", "{21833E5D-93CB-4ED2-97A6-33398AABE7AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{66A4AF83-EAFE-45AE-8ADF-9B4C697911AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagerAPI.Infrastructure.UnitTest", "..\RepositoryUnitTest\InventoryManagerAPI.Infrastructure.UnitTest.csproj", "{17C36098-40F2-4884-9AC5-DD2F3622C42A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagerAPI.Tests.Common", "..\InventoryManagerAPI.Tests.Common\InventoryManagerAPI.Tests.Common.csproj", "{446043E3-003B-4CE4-9C55-3DD5B95C0999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +39,21 @@ Global
 		{21833E5D-93CB-4ED2-97A6-33398AABE7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21833E5D-93CB-4ED2-97A6-33398AABE7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21833E5D-93CB-4ED2-97A6-33398AABE7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C36098-40F2-4884-9AC5-DD2F3622C42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C36098-40F2-4884-9AC5-DD2F3622C42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C36098-40F2-4884-9AC5-DD2F3622C42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C36098-40F2-4884-9AC5-DD2F3622C42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446043E3-003B-4CE4-9C55-3DD5B95C0999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446043E3-003B-4CE4-9C55-3DD5B95C0999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446043E3-003B-4CE4-9C55-3DD5B95C0999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446043E3-003B-4CE4-9C55-3DD5B95C0999}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17C36098-40F2-4884-9AC5-DD2F3622C42A} = {66A4AF83-EAFE-45AE-8ADF-9B4C697911AF}
+		{446043E3-003B-4CE4-9C55-3DD5B95C0999} = {66A4AF83-EAFE-45AE-8ADF-9B4C697911AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {689C7AE5-807D-4893-84A7-DD268C6BEA77}

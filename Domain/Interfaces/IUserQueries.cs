@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InventoryManagerAPI.Domain.Entities;
 
-namespace Domain.Interfaces
+namespace InventoryManagerAPI.Domain.Interfaces
 {
 	/// <summary>
 	/// User Queries Interface

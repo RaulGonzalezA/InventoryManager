@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using InventoryManagerAPI.Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text;
 
-namespace InventoryManagerAPI.Handlers
+namespace InventoryManagerAPI.Host.Handlers
 {
 	public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 	{

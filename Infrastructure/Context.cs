@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using InventoryManagerAPI.Domain;
+using InventoryManagerAPI.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

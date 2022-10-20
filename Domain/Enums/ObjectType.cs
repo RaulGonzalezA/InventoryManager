@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace Domain.Enums
+namespace InventoryManagerAPI.Domain.Enums
 {
 	/// <summary>
 	/// Enum for the diferent Object Types

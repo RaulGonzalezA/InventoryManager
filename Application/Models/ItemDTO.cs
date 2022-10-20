@@ -1,16 +1,16 @@
-﻿using Domain.Enums;
+﻿using InventoryManagerAPI.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Models
+namespace InventoryManagerAPI.Application.Models
 {
 	/// <summary>
 	/// Item Model
 	/// </summary>
-	public class ItemModel
+	public class ItemDTO
 	{
 
 		/// <summary>
