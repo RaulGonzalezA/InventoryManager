@@ -4,6 +4,6 @@ namespace InventoryManagerAPI.Domain.Interfaces
 {
 	public interface IItemQueries
 	{
-		public Task<Item> GetItemByName(string name);
+		public Task<Item> GetItemByNameQuery(string name);
 	}
 }

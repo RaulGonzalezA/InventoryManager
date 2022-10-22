@@ -33,7 +33,7 @@ namespace InventoryManagerAPI.Host.Handlers
 		/// <exception cref="ArgumentException"></exception>
 		protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
 		{
-			string username = null;
+			string username;
 			try
 			{
 				var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);

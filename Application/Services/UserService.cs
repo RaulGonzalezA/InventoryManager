@@ -14,7 +14,7 @@ namespace InventoryManagerAPI.Application.Services
 
 		public async Task<bool> IdentifyUser(string userName, string password)
 		{
-			var user = await _userQueries.IdentifyUser(userName, password);
+			var user = await _userQueries.IdentifyUserQuery(userName, password);
 			return user != null;
 
 		}

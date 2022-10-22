@@ -1,11 +1,12 @@
 ﻿using InventoryManagerAPI.Domain.Enums;
+using InventoryManagerAPI.Domain.Events;
 
 namespace InventoryManagerAPI.Domain.Entities
 {
 	/// <summary>
 	/// Item of the inventory
 	/// </summary>
-	public class Item
+	public class Item : IHasDomainEvent
 	{
 		/// <summary>
 		/// Default constructor
@@ -22,6 +23,9 @@ namespace InventoryManagerAPI.Domain.Entities
 			Type = type;
 			Price = price;
 			Amount = amount;
+
+			DomainEvents.Add(new ItemExpiredEvent(this));
+			DomainEvents.Add(new ItemRemovedEvent(this));
 		}
 
 		/// <summary>
@@ -48,5 +52,9 @@ namespace InventoryManagerAPI.Domain.Entities
 		/// Amount of items
 		/// </summary>
 		public int Amount { get; internal set; }
+		/// <summary>
+		/// Domain events
+		/// </summary>
+		public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
 	}
 }

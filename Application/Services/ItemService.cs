@@ -1,6 +1,6 @@
 ﻿using InventoryManagerAPI.Application.Interfaces;
-using InventoryManagerAPI.Application.Models;
 using InventoryManagerAPI.Domain.Entities;
+using InventoryManagerAPI.Domain.Entities.Models;
 using InventoryManagerAPI.Domain.Exceptions;
 using InventoryManagerAPI.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -30,29 +30,6 @@ namespace InventoryManagerAPI.Application.Services
 		}
 
 		/// <summary>
-		/// Creates a new item
-		/// </summary>
-		/// <param name="itemModel"></param>
-		/// <returns></returns>
-		/// <exception cref="Exception"></exception>
-		public async Task<ItemCreatedDTO> CreateItem(ItemDTO itemModel)
-		{
-			try
-			{
-				Item item = new Item(Guid.NewGuid(), itemModel.Name, itemModel.ExpirationDate, itemModel.Type, itemModel.Price, itemModel.Amount);
-
-				item = await _itemRepository.AddAsync(item);
-
-				return new ItemCreatedDTO(item.Id, item.Name, item.ExpirationDate, item.Type, item.Price, item.Amount);
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError($"Error creating item {ex.Message}");
-				throw new Exception("Error creating item", ex);
-			}
-		}
-
-		/// <summary>
 		/// Deletes a item
 		/// </summary>
 		/// <param name="name">Name of the item to delete</param>
@@ -62,7 +39,7 @@ namespace InventoryManagerAPI.Application.Services
 			Item item;
 			try
 			{
-				item = await _itemQueries.GetItemByName(name);
+				item = await _itemQueries.GetItemByNameQuery(name);
 			}
 			catch (Exception ex)
 			{

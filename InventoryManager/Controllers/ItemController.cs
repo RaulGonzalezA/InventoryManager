@@ -1,8 +1,9 @@
 ﻿using FluentValidation.Results;
+using InventoryManagerAPI.Application.Commands;
 using InventoryManagerAPI.Application.Interfaces;
-using InventoryManagerAPI.Application.Models;
+using InventoryManagerAPI.Domain.Entities.Models;
 using InventoryManagerAPI.Domain.Exceptions;
-using InventoryManagerAPI.Host.Validators;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,24 +18,21 @@ namespace InventoryManagerAPI.Host.Controllers
 	[ApiController]
 	public class ItemController : ControllerBase
 	{
-		private readonly IItemService _itemService;
-		private readonly ILogger<ItemController> _logger;
+		private readonly IMediator _mediator;
 
 		/// <summary>
 		/// Item Controller constructor
 		/// </summary>
-		/// <param name="itemService"></param>
-		/// <param name="logger"></param>
-		public ItemController(IItemService itemService, ILogger<ItemController> logger)
+		/// <param name="mediator"></param>
+		public ItemController(IMediator mediator)
 		{
-			_itemService = itemService;
-			_logger = logger;
+			_mediator = mediator;
 		}
 
 		/// <summary>
 		/// Add new Item to the Inventory
 		/// </summary>
-		/// <param name="itemModel">Item</param>
+		/// <param name="request">Item</param>
 		/// <returns>The new item created</returns>
 		/// <remarks>
 		/// Sample request:
@@ -50,25 +48,16 @@ namespace InventoryManagerAPI.Host.Controllers
 		/// <response code="400">If any error into the response</response>
 		/// <response code="401">If not authorized</response>
 		[HttpPost("", Name = nameof(ItemController.CreateItem))]
-		public async Task<IActionResult> CreateItem([FromBody] ItemDTO itemModel)
+		public async Task<IActionResult> CreateItem([FromBody] CreateItemCommand request)
 		{
-			ItemFluentValidator validator = new ItemFluentValidator();
-			ValidationResult results = validator.Validate(itemModel);
-
-			if (!results.IsValid)
-			{
-				_logger.LogError($"Error in the model: {JsonConvert.SerializeObject(results.Errors)}");
-				return BadRequest(JsonConvert.SerializeObject(results.Errors));
-			}
 
 			try
 			{
-				var itemCreated = await _itemService.CreateItem(itemModel);
-				return Created("", itemCreated);
+				var result = await _mediator.Send(request);
+				return result;
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError($"Error creating Item: {ex.Message}");
 				return BadRequest(ex.Message);
 			}
 		}
@@ -85,30 +74,30 @@ namespace InventoryManagerAPI.Host.Controllers
 		[HttpDelete("{name}", Name = nameof(ItemController.DeleteItem))]
 		public async Task<IActionResult> DeleteItem([FromRoute] string name)
 		{
-			if (string.IsNullOrWhiteSpace(name))
-			{
-				return BadRequest($"{nameof(name)} cant be Null or whitespace.");
-			}
+			//if (string.IsNullOrWhiteSpace(name))
+			//{
+			//	return BadRequest($"{nameof(name)} cant be Null or whitespace.");
+			//}
 
-			try
-			{
-				var deleted = await _itemService.DeleteItem(name);
-				if (!deleted)
-				{
-					_logger.LogError($"Item with name {name} not deleted");
-					return BadRequest($"Item with name {name} not deleted");
-				}
-			}
-			catch (NotFoundException ex)
-			{
-				_logger.LogError($"Item with name {name} not found: {ex.Message}");
-				return NotFound(name);
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError($"Error deleting Item with name {name}: {ex.Message}");
-				return BadRequest(ex.Message);
-			}
+			//try
+			//{
+			//	var deleted = await _itemService.DeleteItem(name);
+			//	if (!deleted)
+			//	{
+			//		_logger.LogError($"Item with name {name} not deleted");
+			//		return BadRequest($"Item with name {name} not deleted");
+			//	}
+			//}
+			//catch (NotFoundException ex)
+			//{
+			//	_logger.LogError($"Item with name {name} not found: {ex.Message}");
+			//	return NotFound(name);
+			//}
+			//catch (Exception ex)
+			//{
+			//	_logger.LogError($"Error deleting Item with name {name}: {ex.Message}");
+			//	return BadRequest(ex.Message);
+			//}
 
 			return NoContent();
 		}

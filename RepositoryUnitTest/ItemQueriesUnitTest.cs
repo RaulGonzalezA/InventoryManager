@@ -1,10 +1,11 @@
 ﻿using FluentAssertions;
+using Infrastructure;
+using Infrastructure.Queries;
 using InventoryManagerAPI.Tests.Common.Builders.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace InventoryManagerAPI.Infrastructure.UnitTest
 {
@@ -12,11 +13,16 @@ namespace InventoryManagerAPI.Infrastructure.UnitTest
 	{
 		private readonly IItemQueries _itemQueries;
 		private readonly IItemRepository _repository;
-
+		private readonly ApiDbContext _context;
+		private readonly DbContextOptions<ApiDbContext> options;
+		private readonly IPublisher publisher;
+		private readonly Mock<ILogger<ApiDbContext>> _logger;
 		public ItemQueriesUnitTest()
 		{
-			_itemQueries = new ItemQueries();
-			_repository = new ItemRepository();
+			_logger = new Mock<ILogger<ApiDbContext>>();
+			_context = new ApiDbContext(options, publisher, _logger.Object);
+			_itemQueries = new GetItemByName(_context);
+			_repository = new ItemRepository(_context);
 		}
 
 		[Test]
@@ -29,7 +35,7 @@ namespace InventoryManagerAPI.Infrastructure.UnitTest
 			await _repository.AddAsync(item2);
 
 			//Act
-			var itemResult = await _itemQueries.GetItemByName(item.Name);
+			var itemResult = await _itemQueries.GetItemByNameQuery(item.Name);
 
 			//Assert
 			itemResult.Should().BeEquivalentTo(item);
@@ -45,7 +51,7 @@ namespace InventoryManagerAPI.Infrastructure.UnitTest
 			await _repository.AddAsync(item2);
 
 			//Act
-			var itemResult = await _itemQueries.GetItemByName("NameNotFound");
+			var itemResult = await _itemQueries.GetItemByNameQuery("NameNotFound");
 
 			//Assert
 			itemResult.Should().BeNull();

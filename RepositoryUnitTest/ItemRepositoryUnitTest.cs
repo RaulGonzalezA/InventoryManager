@@ -1,17 +1,28 @@
 
 
 using FluentAssertions;
+using Infrastructure;
 using InventoryManagerAPI.Tests.Common.Builders.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace InventoryManagerAPI.Repository.UnitTest
 {
 	public class Tests
 	{
 		private readonly IItemRepository _repository;
+		private readonly ApiDbContext _context;
+		private readonly DbContextOptions<ApiDbContext> options;
+		private readonly IPublisher publisher;
+		private readonly Mock<ILogger<ApiDbContext>> _logger;
 
 		public Tests()
 		{
-			_repository = new ItemRepository();
+			_logger = new Mock<ILogger<ApiDbContext>>();
+			_context = new ApiDbContext(options, publisher, _logger.Object);
+			_repository = new ItemRepository(_context);
 		}
 
 		[SetUp]

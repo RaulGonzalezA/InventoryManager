@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
+using InventoryManagerAPI.Application.Commands;
 using InventoryManagerAPI.Domain.Entities.Models;
 
-namespace InventoryManagerAPI.Host.Validators
+namespace InventoryManagerAPI.Application.Validators
 {
 	/// <summary>
 	/// Item Fluent Validator
 	/// </summary>
-	public class ItemFluentValidator : AbstractValidator<ItemDTO>
+	public class ItemFluentValidator : AbstractValidator<CreateItemCommand>
 	{
 		/// <summary>
 		/// Constructor to set rules of validation

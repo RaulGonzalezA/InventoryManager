@@ -1,22 +1,29 @@
+using Infrastructure;
+using Infrastructure.Queries;
 using Infrastructure.Repository;
 using InventoryManagerAPI.Application.Interfaces;
 using InventoryManagerAPI.Application.Services;
 using InventoryManagerAPI.Domain.Interfaces;
 using InventoryManagerAPI.Host.Handlers;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using MediatR;
 using System.Text.Json.Serialization;
+using InventoryManagerAPI.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddScoped<IItemQueries, ItemQueries>();
-builder.Services.AddScoped<IItemService, ItemService>();
-builder.Services.AddScoped<IItemRepository, ItemRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserQueries, UserQueries>();
+builder.Services.AddDbContext<ApiDbContext>(options => options
+	.UseInMemoryDatabase(nameof(ApiDbContext)));
 
+// Add services to the container.
+builder.Services.AddScoped(typeof(IItemQueries), typeof(GetItemByName));
+builder.Services.AddScoped(typeof(IItemService), typeof(ItemService));
+builder.Services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
+builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+builder.Services.AddScoped(typeof(IUserQueries), typeof(IdentifyUser));
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
 	options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
@@ -24,6 +31,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
 	options.SwaggerDoc("v1", new OpenApiInfo
@@ -56,6 +64,9 @@ builder.Services.AddSwaggerGen(options =>
 	var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 	options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+builder.Services.AddMediatR(typeof(CreateItemCommandHandler));
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 builder.Services.AddAuthorization();
