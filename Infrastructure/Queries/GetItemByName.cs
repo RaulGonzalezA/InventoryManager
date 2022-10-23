@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Queries
 {
-	public class GetItemByName : IItemQueries
+	public class GetItemByName : IGetItemByName
 	{
 		private readonly ApiDbContext _context;
 
@@ -15,12 +15,9 @@ namespace Infrastructure.Queries
 
 		public async Task<Item> GetItemByNameQuery(string name)
 		{
-			using (_context)
-			{
-				var item = await _context.Items.Where(x => x.Name == name).FirstOrDefaultAsync();
+			var item = await _context.Items.Where(x => x.Name == name).FirstOrDefaultAsync();
 
-				return item;
-			}
+			return item;
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Infrastructure
 	/// </summary>
 	public class ApiDbContext : DbContext
 	{
-		private readonly IPublisher _publisher;
+		public readonly IPublisher _publisher;
 		private readonly ILogger<ApiDbContext> _logger;
 
 		/// <summary>
@@ -70,6 +70,7 @@ namespace Infrastructure
 
 			builder.Entity<Item>()
 				.Ignore(x => x.DomainEvents);
+
 		}
 
 	}

@@ -1,18 +1,14 @@
 ﻿using FluentValidation;
 using InventoryManagerAPI.Application.Commands;
-using InventoryManagerAPI.Domain.Entities.Models;
 
 namespace InventoryManagerAPI.Application.Validators
 {
-	/// <summary>
-	/// Item Fluent Validator
-	/// </summary>
-	public class ItemFluentValidator : AbstractValidator<CreateItemCommand>
+	public class UpdateItemFluentValidator : AbstractValidator<UpdateItemCommand>
 	{
 		/// <summary>
 		/// Constructor to set rules of validation
 		/// </summary>
-		public ItemFluentValidator()
+		public UpdateItemFluentValidator()
 		{
 			RuleFor(p => p.Name)
 				.NotEmpty()
@@ -41,14 +37,9 @@ namespace InventoryManagerAPI.Application.Validators
 				.WithMessage("Amount Should be greater than 0");
 
 			RuleFor(p => p.ExpirationDate)
-				.NotNull()
-				.WithErrorCode("ItemExpirationDate")
-				.WithMessage("Expiration Date is mandatory");
-
-			RuleFor(p => p.ExpirationDate)
-				.Must(p => true).GreaterThan(DateTime.Now.AddDays(5))
-				.WithErrorCode("ItemExpirationDate")
-				.WithMessage("Expiration Date should be at least 5 days from today");
+				.Must(p => true).LessThanOrEqualTo(DateTime.Now).When(p => p.ExpirationDate.HasValue)
+				.WithErrorCode("ExpirationDate")
+				.WithMessage("ExpirationDate Should be sooner than today");
 		}
 	}
 }

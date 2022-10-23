@@ -11,12 +11,8 @@ namespace Infrastructure.Queries
 		public IdentifyUser(ApiDbContext context)
 		{
 			_context = context;
-			//Just one time in the constructor
-			
-			var user = new User("Raul", "1234");
-			_context.Users.Add(user);
-			_context.SaveChanges();
-			
+
+
 		}
 
 		/// <summary>

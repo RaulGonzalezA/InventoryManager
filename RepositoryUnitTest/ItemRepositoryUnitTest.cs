@@ -3,38 +3,33 @@
 using FluentAssertions;
 using Infrastructure;
 using InventoryManagerAPI.Tests.Common.Builders.Entities;
+using InventoryManagerAPI.Tests.Common.Context;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace InventoryManagerAPI.Repository.UnitTest
 {
-	public class Tests
+	public class ItemRepositoryUnitTest
 	{
-		private readonly IItemRepository _repository;
-		private readonly ApiDbContext _context;
-		private readonly DbContextOptions<ApiDbContext> options;
-		private readonly IPublisher publisher;
-		private readonly Mock<ILogger<ApiDbContext>> _logger;
+		private IItemRepository _repository;
+		private ApiDbContext _context;
+		private Mock<IPublisher> _publisher;
 
-		public Tests()
-		{
-			_logger = new Mock<ILogger<ApiDbContext>>();
-			_context = new ApiDbContext(options, publisher, _logger.Object);
-			_repository = new ItemRepository(_context);
-		}
 
 		[SetUp]
 		public void Setup()
 		{
+			_publisher = new Mock<IPublisher>();
+
+			_context = InMemoryContext.GetContext(_publisher);
+			_repository = new ItemRepository(_context);
 		}
 
 		[Test]
 		public async Task AddItem_WithData_ShouldWork()
 		{
 			//Arrange
-			var item = new ItemBuilder().Build();
+			var item = new ItemBuilder().WithId(Guid.NewGuid()).Build();
 
 			//Act
 			var itemResult = await _repository.AddAsync(item);
@@ -61,7 +56,7 @@ namespace InventoryManagerAPI.Repository.UnitTest
 		public async Task DeleteItem_ItemExists_ShouldReturnTrue()
 		{
 			//Arrange
-			var item = new ItemBuilder().Build();
+			var item = new ItemBuilder().WithId(Guid.NewGuid()).Build();
 			var itemAdded = await _repository.AddAsync(item);
 
 			//Act
@@ -88,7 +83,7 @@ namespace InventoryManagerAPI.Repository.UnitTest
 		public async Task AddTwoDiferentItems_WithData_ShouldWork()
 		{
 			//Arrange
-			var item = new ItemBuilder().Build();
+			var item = new ItemBuilder().WithId(Guid.NewGuid()).Build();
 			var item2 = new ItemBuilder().WithId(Guid.NewGuid()).WithName("BhBike2").Build();
 
 			//Act

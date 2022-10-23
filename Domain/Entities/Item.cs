@@ -1,12 +1,13 @@
 ﻿using InventoryManagerAPI.Domain.Enums;
 using InventoryManagerAPI.Domain.Events;
+using InventoryManagerAPI.Domain.Responses;
 
 namespace InventoryManagerAPI.Domain.Entities
 {
 	/// <summary>
 	/// Item of the inventory
 	/// </summary>
-	public class Item : IHasDomainEvent
+	public class Item : ItemResponse, IHasDomainEvent
 	{
 		/// <summary>
 		/// Default constructor
@@ -15,7 +16,7 @@ namespace InventoryManagerAPI.Domain.Entities
 		{
 		}
 
-		public Item(Guid id, string name, DateTime expirationDate, ObjectTypeEnum type, decimal price, int amount)
+		public Item(Guid id, string name, ObjectTypeEnum type, decimal price, int amount, DateTime? expirationDate = null)
 		{
 			Id = id;
 			Name = name;
@@ -23,35 +24,28 @@ namespace InventoryManagerAPI.Domain.Entities
 			Type = type;
 			Price = price;
 			Amount = amount;
-
-			DomainEvents.Add(new ItemExpiredEvent(this));
-			DomainEvents.Add(new ItemRemovedEvent(this));
 		}
 
-		/// <summary>
-		/// Id of the Item
-		/// </summary>
-		public Guid Id { get; internal set; }
-		/// <summary>
-		/// Name of the item
-		/// </summary>
-		public string? Name { get; internal set; }
-		/// <summary>
-		/// Date expiration of the item
-		/// </summary>
-		public DateTime ExpirationDate { get; internal set; }
-		/// <summary>
-		/// Type of item
-		/// </summary>
-		public ObjectTypeEnum Type { get; internal set; }
-		/// <summary>
-		/// Price of the item
-		/// </summary>
-		public decimal Price { get; internal set; }
-		/// <summary>
-		/// Amount of items
-		/// </summary>
-		public int Amount { get; internal set; }
+		public static Item DeleteItem(Item item)
+		{
+			var itemResult = item;
+			itemResult.DomainEvents.Add(new ItemRemovedEvent(itemResult));
+
+			return itemResult;
+		}
+
+		public void UpdateItem(string name, ObjectTypeEnum type, decimal price, int amount, DateTime? expirationDate = null)
+		{
+			Name = name;
+			Type = type;
+			Price = price;
+			Amount = amount;
+			ExpirationDate = expirationDate;
+
+			if (expirationDate <= DateTime.Now)
+				this.DomainEvents.Add(new ItemExpiredEvent(this));
+
+		}
 		/// <summary>
 		/// Domain events
 		/// </summary>

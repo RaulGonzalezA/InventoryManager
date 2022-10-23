@@ -21,7 +21,7 @@ namespace InventoryManagerAPI.Tests.Common.Builders.Entities
 		/// <returns></returns>
 		public Item Build()
 		{
-			return new Item(_id, _name, _expirationDate, _type, _price, _amount);
+			return new Item(_id, _name, _type, _price, _amount);
 		}
 
 		/// <summary>
