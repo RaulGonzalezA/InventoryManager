@@ -28,3 +28,5 @@ The nuget pakages I've used are the next:
 - EntityFrameworkCode - to manage the database
 - Nwtonsoft - to serialize json
 - IdentityModels.Tokens.Jwt - to authentication
+
+For testing I've used NUnit, Moq and FluentValidations.
