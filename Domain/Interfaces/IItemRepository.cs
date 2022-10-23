@@ -20,5 +20,12 @@ namespace InventoryManagerAPI.Domain.Interfaces
 		/// <param name="item">Item to remove</param>
 		/// <returns>If the item was removed or not</returns>
 		public Task<bool> RemoveItemAsync(Item item);
+
+		/// <summary>
+		/// Updates an item
+		/// </summary>
+		/// <param name="item">Item to update</param>
+		/// <returns></returns>
+		public Task<Item> UpdateItemAsync(Item item);
 	}
 }
