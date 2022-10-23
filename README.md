@@ -5,6 +5,15 @@ Inventory Manager for code test
 
 To run the aplication just need to run the project. To authenticate just need to add user and password. The valid values are Raul - 1234. 
 
+I've declare 4 endpoints. 
+
+- GetItems -> Get all the items
+- PostItem -> Add new Item
+- DeleteItem -> Deletes a Item
+- UpdateItem -> Updates a item.
+
+The documentation of the API is done with Swashbuckle.AspNetCore
+
 2. Desing and Code structure
 
 I use DDD design pattern as sugested into the prove. I've divided the solution in 4 projects and tests.
