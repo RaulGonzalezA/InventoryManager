@@ -39,3 +39,10 @@ The nuget pakages I've used are the next:
 - IdentityModels.Tokens.Jwt - to authentication
 
 For testing I've used NUnit, Moq and FluentValidations.
+
+3 - Improvements
+
+Use token bearer and IS for authentication.
+Could use dapper for querys
+Need to add pagination and somefilters for GetItems()
+For the events could send the event by email, by serviceBus or other services
