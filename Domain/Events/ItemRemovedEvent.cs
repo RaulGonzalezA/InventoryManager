@@ -2,6 +2,9 @@
 
 namespace InventoryManagerAPI.Domain.Events
 {
+	/// <summary>
+	/// Item Removed Event
+	/// </summary>
 	public class ItemRemovedEvent : DomainEvent
 	{
 		public ItemRemovedEvent(Item item)
@@ -9,6 +12,9 @@ namespace InventoryManagerAPI.Domain.Events
 			Item = item;
 		}
 
+		/// <summary>
+		/// Item
+		/// </summary>
 		public Item Item { get; set; }
 	}
 }

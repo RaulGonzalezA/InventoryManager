@@ -16,6 +16,15 @@ namespace InventoryManagerAPI.Domain.Entities
 		{
 		}
 
+		/// <summary>
+		/// Constructor with parameters
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="name"></param>
+		/// <param name="type"></param>
+		/// <param name="price"></param>
+		/// <param name="amount"></param>
+		/// <param name="expirationDate"></param>
 		public Item(Guid id, string name, ObjectTypeEnum type, decimal price, int amount, DateTime? expirationDate = null)
 		{
 			Id = id;
@@ -26,6 +35,12 @@ namespace InventoryManagerAPI.Domain.Entities
 			Amount = amount;
 		}
 
+
+		/// <summary>
+		/// Delete an item
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
 		public static Item DeleteItem(Item item)
 		{
 			var itemResult = item;
@@ -34,6 +49,14 @@ namespace InventoryManagerAPI.Domain.Entities
 			return itemResult;
 		}
 
+		/// <summary>
+		/// Update an item
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="type"></param>
+		/// <param name="price"></param>
+		/// <param name="amount"></param>
+		/// <param name="expirationDate"></param>
 		public void UpdateItem(string name, ObjectTypeEnum type, decimal price, int amount, DateTime? expirationDate = null)
 		{
 			Name = name;

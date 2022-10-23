@@ -21,7 +21,7 @@ namespace Infrastructure.Queries
 		/// <param name="userName"></param>
 		/// <param name="password"></param>
 		/// <returns></returns>
-		public async Task<User> IdentifyUserQuery(string userName, string password)
+		public async Task<User?> IdentifyUserQuery(string userName, string password)
 		{
 			var user = await _context.Users.Where(a => a.UserName == userName && a.Password == password).FirstOrDefaultAsync();
 			if (user == null) return null;

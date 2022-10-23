@@ -11,7 +11,13 @@ namespace InventoryManagerAPI.Domain.Events
 		{
 			DateOccurred = DateTimeOffset.UtcNow;
 		}
+		/// <summary>
+		/// If the event is Published
+		/// </summary>
 		public bool IsPublished { get; set; }
+		/// <summary>
+		/// Date of publishing
+		/// </summary>
 		public DateTimeOffset DateOccurred { get; protected set; } = DateTime.UtcNow;
 	}
 }

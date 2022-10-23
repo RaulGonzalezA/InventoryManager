@@ -13,6 +13,6 @@ namespace InventoryManagerAPI.Domain.Interfaces
 		/// <param name="userName">User name</param>
 		/// <param name="password">Password</param>
 		/// <returns></returns>
-		public Task<User> IdentifyUserQuery(string userName, string password);
+		public Task<User?> IdentifyUserQuery(string userName, string password);
 	}
 }

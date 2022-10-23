@@ -42,6 +42,9 @@ namespace InventoryManagerAPI.Application.Commands
 		public int Amount { get; set; }
 	}
 
+	/// <summary>
+	/// Create Item Command Handler
+	/// </summary>
 	public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, IActionResult>
 	{
 		private readonly IItemRepository _itemRepository;
@@ -53,6 +56,12 @@ namespace InventoryManagerAPI.Application.Commands
 			_logger = logger;
 		}
 
+		/// <summary>
+		/// Handler
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		public async Task<IActionResult> Handle(CreateItemCommand request, CancellationToken cancellationToken)
 		{
 			CreateItemFluentValidator validator = new CreateItemFluentValidator();

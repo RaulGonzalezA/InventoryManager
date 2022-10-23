@@ -5,11 +5,10 @@ namespace InventoryManagerAPI.Tests.Common.Builders.Commands
 {
 	public class CreateItemCommandBuilder
 	{
-		private string _name = "BhBike";
-		private DateTime _expirationDate = DateTime.Now.AddDays(6);
-		private ObjectTypeEnum _type = ObjectTypeEnum.Bike;
-		private decimal _price = 100;
-		private int _amount = 1;
+		internal string _name = "BhBike";
+		internal ObjectTypeEnum _type = ObjectTypeEnum.Bike;
+		internal decimal _price = 100;
+		internal int _amount = 1;
 
 		/// <summary>
 		/// Builds a new CreateItemCommand
@@ -31,15 +30,6 @@ namespace InventoryManagerAPI.Tests.Common.Builders.Commands
 			return this;
 		}
 
-		/// <summary>
-		/// CreateItemCommand builder setting Expiration Date
-		/// </summary>
-		/// <param name="expirationDate"></param>
-		/// <returns></returns>
-		public CreateItemCommandBuilder WithExpirationDate(DateTime expirationDate)
-		{
-			_expirationDate = expirationDate;
-			return this;
-		}
+		
 	}
 }

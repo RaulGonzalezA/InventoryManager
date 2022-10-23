@@ -1,20 +1,19 @@
-using FluentAssertions;
+﻿using FluentAssertions;
+using FluentValidation.Results;
 using InventoryManagerAPI.Application.Commands;
 using InventoryManagerAPI.Application.Validators;
 using InventoryManagerAPI.Tests.Common.Builders.Commands;
-using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace InventoryManagerAPI.Domain.UnitTest
 {
-	public class CreateItemCommandValidatorUnitTest
+	public class UpdateItemCommandValidatorUnitTest
 	{
-
 		[Test]
 		public void ValidateItem_ValidData_ShouldBeValid()
 		{
 			//Arrange
-			CreateItemCommand item = new CreateItemCommandBuilder().Build();
-			CreateItemFluentValidator validator = new CreateItemFluentValidator();
+			UpdateItemCommand item = new UpdateItemCommandBuilder().Build();
+			UpdateItemFluentValidator validator = new UpdateItemFluentValidator();
 
 			//Act
 			ValidationResult results = validator.Validate(item);
@@ -27,8 +26,8 @@ namespace InventoryManagerAPI.Domain.UnitTest
 		public void ValidateItem_WithoutName_ShouldBeNoValid()
 		{
 			//Arrange
-			CreateItemCommand item = new CreateItemCommandBuilder().WithName(String.Empty).Build();
-			CreateItemFluentValidator validator = new CreateItemFluentValidator();
+			UpdateItemCommand item = new UpdateItemCommandBuilder().WithExpirationDate(DateTime.Today.AddDays(1)).Build();
+			UpdateItemFluentValidator validator = new UpdateItemFluentValidator();
 
 			//Act
 			ValidationResult results = validator.Validate(item);

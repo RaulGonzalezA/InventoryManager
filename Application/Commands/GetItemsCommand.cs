@@ -10,6 +10,9 @@ namespace InventoryManagerAPI.Application.Commands
 	{
 	}
 
+	/// <summary>
+	/// Get Items Command Handler
+	/// </summary>
 	public class GetItemsCommandHandler : IRequestHandler<GetItemsCommand, IActionResult>
 	{
 
@@ -22,6 +25,12 @@ namespace InventoryManagerAPI.Application.Commands
 			_getItems = getItems;
 		}
 
+		/// <summary>
+		/// Handler
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		public async Task<IActionResult> Handle(GetItemsCommand request, CancellationToken cancellationToken)
 		{
 			try

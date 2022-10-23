@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 
 namespace InventoryManagerAPI.Application.Commands
 {
+	/// <summary>
+	/// Update Item Command
+	/// </summary>
 	public class UpdateItemCommand : IRequest<IActionResult>
 	{
 		public UpdateItemCommand(string? name, ObjectTypeEnum type, decimal price, int amount, DateTime? expirationDate = null)
@@ -43,6 +46,10 @@ namespace InventoryManagerAPI.Application.Commands
 		/// </summary>
 		public int Amount { get; set; }
 	}
+
+	/// <summary>
+	/// Update Item Command Handler
+	/// </summary>
 	public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, IActionResult>
 	{
 		private readonly IItemRepository _itemRepository;
@@ -56,6 +63,12 @@ namespace InventoryManagerAPI.Application.Commands
 			_itemQueries = itemQueries;
 		}
 
+		/// <summary>
+		/// Handler of command
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		public async Task<IActionResult> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
 		{
 			UpdateItemFluentValidator validator = new UpdateItemFluentValidator();

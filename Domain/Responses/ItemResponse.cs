@@ -2,6 +2,9 @@
 
 namespace InventoryManagerAPI.Domain.Responses
 {
+	/// <summary>
+	/// Item Response
+	/// </summary>
 	public class ItemResponse
 	{
 		/// <summary>

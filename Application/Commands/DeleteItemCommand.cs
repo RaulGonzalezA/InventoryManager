@@ -17,6 +17,9 @@ namespace InventoryManagerAPI.Application.Commands
 		public string? Name { get; set; }
 	}
 
+	/// <summary>
+	/// Delete Item Command Handler
+	/// </summary>
 	public class DeleteItemCommandHandler : IRequestHandler<DeleteItemCommand, IActionResult>
 	{
 		private readonly IItemRepository _itemRepository;
@@ -30,6 +33,12 @@ namespace InventoryManagerAPI.Application.Commands
 			_itemQueries = itemQueries;
 		}
 
+		/// <summary>
+		/// Handler
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		public async Task<IActionResult> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
 		{
 			Item item;
