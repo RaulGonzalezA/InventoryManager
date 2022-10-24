@@ -30,6 +30,6 @@ namespace InventoryManagerAPI.Tests.Common.Builders.Commands
 			return this;
 		}
 
-		
+
 	}
 }

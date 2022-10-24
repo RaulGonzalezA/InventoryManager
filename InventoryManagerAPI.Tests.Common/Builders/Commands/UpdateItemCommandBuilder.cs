@@ -10,7 +10,7 @@ namespace InventoryManagerAPI.Tests.Common.Builders.Commands
 		/// Builds a new CreateItemCommand
 		/// </summary>
 		/// <returns></returns>
-		public new UpdateItemCommand Build() 
+		public new UpdateItemCommand Build()
 		{
 			return new UpdateItemCommand(_name, _type, _price, _amount, _expirationDate);
 		}

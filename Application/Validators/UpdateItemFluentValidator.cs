@@ -36,13 +36,14 @@ namespace InventoryManagerAPI.Application.Validators
 				.WithErrorCode("ItemAmount")
 				.WithMessage("Amount Should be greater than 0");
 
-			When(p => p.ExpirationDate.HasValue, () => {
+			When(p => p.ExpirationDate.HasValue, () =>
+			{
 
 				RuleFor(p => p.ExpirationDate)
 					.NotEmpty().LessThanOrEqualTo(DateTime.Now)
 					.WithErrorCode("ExpirationDate")
 					.WithMessage("ExpirationDate Should be sooner than today");
-				});
+			});
 		}
 	}
 }

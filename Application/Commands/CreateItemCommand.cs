@@ -77,7 +77,7 @@ namespace InventoryManagerAPI.Application.Commands
 
 				ItemResponse itemResult = await _itemRepository.AddAsync(item);
 
-				return new CreatedResult("", item);
+				return new CreatedResult("", itemResult);
 			}
 			catch (Exception ex)
 			{
