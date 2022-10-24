@@ -106,7 +106,6 @@ namespace InventoryManagerAPI.Host.Controllers
 		/// <summary>
 		/// Gets all Items from the inventory
 		/// </summary>
-		/// <param name="request">Item to update</param>
 		/// <returns></returns>
 		/// <response code="200">The list of itemsd</response>
 		/// <response code="400">If any error into the response</response>
