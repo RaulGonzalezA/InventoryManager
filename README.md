@@ -38,7 +38,7 @@ The nuget pakages I've used are the next:
 - Nwtonsoft - to serialize json
 - IdentityModels.Tokens.Jwt - to authentication
 
-For testing I've used NUnit, Moq and FluentValidations.
+For testing I've used NUnit, Moq and FluentValidations. I've done a test of one of each files, is needed to complete the tests.
 
 3 - Improvements
 
